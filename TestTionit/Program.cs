@@ -1,15 +1,20 @@
-﻿using System.Threading;
+using System.Threading;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-var botClient = new TelegramBotClient("YOUR_API_KEY");
+// Ссылка на бота: https://t.me/TestSerjolikBot
+// Ссылка на сервер: https://t.me/+tHZbefafZHAwMzA6
+
+var botClient = new TelegramBotClient("YOUR_BOT_KEY");
+
+var chatId = null; // Наша беседа
 
 using CancellationTokenSource cts = new();
 
-Dictionary<long, int> userTopics = new Dictionary<long, int>(); // присваиваем пользователю определённый топик
+Dictionary<long, int> userTopics = new Dictionary<long, int>(); // словарь (long) userId к (int) TopicId
 
 // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
 ReceiverOptions receiverOptions = new()
@@ -43,12 +48,10 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
     var messageSticker = message.Sticker;
 
     // Проверим, что тип сообщения подходит под наши критерии
-    if (messageText is { } && messageSticker is { })
+    if (messageText is null && messageSticker is null)
         return;
 
     var senderChatId = message.Chat.Id; // Записываем айди чата из которого пришло сообщение
-
-    long chatId = "Айди беседы"; // Наша беседа
 
     // Update сработал:
     Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
