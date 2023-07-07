@@ -5,9 +5,6 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-// Ссылка на бота: https://t.me/TestSerjolikBot
-// Ссылка на сервер: https://t.me/+tHZbefafZHAwMzA6
-
 var botClient = new TelegramBotClient("YOUR_BOT_KEY");
 
 var chatId = null; // Наша беседа
